@@ -20,7 +20,7 @@ class Encoder2D(nn.Module):
         sample_rate = config.sample_rate
         sample_v = int(math.pow(2, sample_rate))
         assert config.patch_size[0] * config.patch_size[1] * \
-            config.hidden_size % (sample_v**2) == 0, "不能除尽"
+            config.hidden_size % (sample_v**2) == 0, "Cannot be evenly divided"
         self.final_dense = nn.Linear(
             config.hidden_size, config.patch_size[0] * config.patch_size[1] * config.hidden_size // (sample_v**2))
         self.patch_size = config.patch_size
@@ -32,23 +32,15 @@ class Encoder2D(nn.Module):
     def forward(self, x):
         # x:(b, c, w, h)
         b, c, h, w = x.shape
-        # assert self.config.in_channels == c, "in_channels != 输入图像channel"
         p1 = self.patch_size[0]
         p2 = self.patch_size[1]
-
-        # if h % p1 != 0:
-        #     print("请重新输入img size 参数 必须整除")
-        #     os._exit(0)
-        # if w % p2 != 0:
-        #     print("请重新输入img size 参数 必须整除")
-        #     os._exit(0)
         hh = h // p1
         ww = w // p2
 
         # x = rearrange(x, 'b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = p1, p2 = p2)
 
-        # encode_x = self.bert_model(x)[-1] # 取出来最后一层
-        encode_x = self.bert_model(x)[:, 1:] # 各个patch的编码结果
+        # encode_x = self.bert_model(x)[-1] 
+        encode_x = self.bert_model(x)[:, 1:] # Encoding results of each patch
         if not self.is_segmentation:
             return encode_x
 
@@ -168,12 +160,12 @@ class SETRModel(nn.Module):
                              num_hidden_layers=num_hidden_layers,
                              num_attention_heads=num_attention_heads)
         self.encoder_2d = Encoder2D(config) # vit encoder
-        self.decoder_2d = Decoder2D(in_channels=config.hidden_size,  # 一系列卷积上采样，恢复原图大小，通道数降为1
+        self.decoder_2d = Decoder2D(in_channels=config.hidden_size,  # A series of convolutional upsampling to restore the original image size, reducing the number of channels to 1.
                                     out_channels=config.out_channels, features=decode_features)
 
     def forward(self, x):
-        _, final_x = self.encoder_2d(x)  # 得到经过调序的编码结果，可以视为一张高通道数的图片
-        x = self.decoder_2d(final_x)  # 降通道数，上采样
+        _, final_x = self.encoder_2d(x)  # The reordered encoding results can be regarded as a high-channel image.
+        x = self.decoder_2d(final_x)  # educe the number of channels and upsample.
         return x
 
 
