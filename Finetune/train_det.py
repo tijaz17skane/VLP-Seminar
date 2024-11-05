@@ -29,13 +29,13 @@ def load_config(config_path):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='PyTorch Lightning Training')
-    parser.add_argument("--dataset", type=str, default="rsna")
+    parser.add_argument("--dataset", type=str, default="rsna", help="Dataset to use: rsna")
     parser.add_argument('--gpus', type=int, default=1, help='Number of GPUs to use (default: 1)')
     parser.add_argument('--config', type=str, default='../configs/rsna.yaml', help='Path to config file')
-    parser.add_argument("--batch_size", type=int, default=32)
-    parser.add_argument("--num_workers", type=int, default=16)
-    parser.add_argument("--data_pct", type=float, default=0.01)
-    parser.add_argument("--max_epochs", type=int, default=50)
+    parser.add_argument("--batch_size", type=int, default=32, help="Batch size")
+    parser.add_argument("--num_workers", type=int, default=16, help="Number of workers for dataloader")
+    parser.add_argument("--data_pct", type=float, default=0.01, help="Percentage of data to use")
+    parser.add_argument("--max_epochs", type=int, default=50, help="Number of epochs to train")
     parser.add_argument('--ckpt_dir', type=str, default='../data/ckpts', help='Directory to save model checkpoints')
     parser.add_argument('--logger_dir', type=str, default='../data/log_output', help='Directory to save logs')
     return parser.parse_args()
