@@ -1,0 +1,43 @@
+dataset:
+  img_size: 224
+  dataset_dir: /u/home/lj0/datasets/RSNA_Pneumoni
+  train_csv: /u/home/lj0/Code/VLP-Seminars/annotations/rsna/train.csv
+  valid_csv: /u/home/lj0/Code/VLP-Seminars/annotations/rsna/val.csv
+  test_csv: /u/home/lj0/Code/VLP-Seminars/annotations/rsna/test.csv
+  
+cls:
+  img_size: 224
+  backbone: resnet_50 #resnet and vit are supported
+  multilabel: False
+  embed_dim: 128  
+  in_features: 2048
+  num_classes: 2
+  pretrained: True
+  freeze: True
+  checkpoint: /home/june/Code/MGCA-main/data/ckpts/resnet_50.ckpt
+  lr: 5.0e-4
+  dropout: 0.0
+  weight_decay: 1.0e-6
+
+det:
+    img_size: 224
+    backbone: resnet_50 #only resnet_50 is supported
+    lr: 5.0e-4
+    weight_decay: 1.0e-6
+    conf_thres: 0.5
+    iou_thres: [0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75]
+    nms_thres: 0.5
+    pretrained: True
+    freeze: True
+    max_objects: 10
+    checkpoint: /home/june/Code/MGCA-main/data/ckpts/resnet_50.ckpt
+  
+seg:
+    img_size: 224 #224 for vit
+    backbone: vit_base #only resnet_50 is supported vit
+    lr: 2e-4
+    weight_decay: 0.05
+    pretrained: True
+    freeze: True
+    embed_dim: 128  
+    checkpoint: /home/june/Code/MGCA-main/data/ckpts/vit_base.ckpt

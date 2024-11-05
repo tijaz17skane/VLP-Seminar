@@ -1,0 +1,38 @@
+cls:
+  img_size: 224
+  backbone: resnet_50 #resnet and vit are supported
+  multilabel: True
+  embed_dim: 128  
+  in_features: 2048
+  num_classes: 5
+  pretrained: True
+  freeze: True
+  checkpoint: /home/june/Code/MGCA-main/data/ckpts/resnet_50.ckpt
+  lr: 5.0e-4
+  dropout: 0.0
+  weight_decay: 1.0e-6
+
+
+dataset:
+  img_type: Frontal
+  CHEXPERT_VIEW_COL: Frontal/Lateral
+  CHEXPERT_PATH_COL: Path
+  CHEXPERT_SPLIT_COL: Split
+  img_size: 224
+  dataset_dir: /u/home/lj0/datasets/cheXpert_small/CheXpert-v1.0-small
+  train_csv: /u/home/lj0/Code/VLP-Seminars/annotations/checkpert/train_split.csv
+  valid_csv: /u/home/lj0/Code/VLP-Seminars/annotations/checkpert/valid_split.csv
+  test_csv: /u/home/lj0/datasets/cheXpert_small/CheXpert-v1.0-small/valid.csv
+  CHEXPERT_COMPETITION_TASKS: # follow mgca, only compare with these tasks
+    - Atelectasis
+    - Cardiomegaly
+    - Consolidation
+    - Edema
+    - Pleural Effusion
+  # based on the chexpert paper.
+  CHEXPERT_UNCERTAIN_MAPPINGS: # follow original paper, if label is uncertain (-1), map via this dictionary 
+    Atelectasis: 1
+    Cardiomegaly: 0
+    Consolidation: 0
+    Edema: 1
+    Pleural Effusion: 1
