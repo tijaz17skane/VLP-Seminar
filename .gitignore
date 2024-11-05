@@ -6,6 +6,4 @@ data/log_output/*
 
 # Ignore all __pycache__ directories recursively
 **/__pycache__/
-# Keep the data folder, but ignore its contents
-data/*
-!.gitkeep
+
