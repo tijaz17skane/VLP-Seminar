@@ -1,4 +1,4 @@
-# VLP finetune code for AI for Vision-Language Models in Medical Imaging (IN2107)
+# 🚀 VLP finetune code for AI for Vision-Language Models in Medical Imaging (IN2107)
 
 **This repository contains code for the "AI for Vision-Language Models in Medical Imaging (IN2107)." For more information, visit the [VLP Seminar page](https://compai-lab.github.io/teaching/vlm_seminar/).**
 
@@ -7,8 +7,8 @@ The code is designed to fine-tune Vision-Language Pre-trained models for downstr
 This project is built upon the code from MGCA: [HKU-MedAI GitHub Repository](https://github.com/HKU-MedAI). A special thanks to them for their contributions~
 
 
-# Structure of the Repository
-Here are the base strucres of our repository.
+# 🗂️ Structure of the Repository
+Here are the base structures of our repository.
 ```
 .
 ├── annotations # Stores the outputs of the preprocessing and annotations for each dataset.
@@ -23,7 +23,7 @@ Here are the base strucres of our repository.
 Here’s a polished version of your "Preprocess Datasets" section for the README, focusing on the RSNA dataset. I’ve improved the grammar, clarity, and formatting:
 
 
-# Preprocess Datasets
+# 🛠️ Preprocess Datasets
 Here give examples for two dataset: rsna and also chexkpert.
 
 ## RSNA Dataset
@@ -66,7 +66,7 @@ unzip chexpert-v10-small.zip -d ./
 ```
 
 
-# Finetune
+# 🔧 Finetune
 Note: The training part of the code is based on PyTorch Lightning. If you are not familiar with PyTorch Lightning, you can look at the introduction here: [PyTorch Lightning Introduction](https://lightning.ai/docs/pytorch/stable/starter/introduction.html) 📚.
 
 With PyTorch Lightning, there is no need to write the trainer yourself; you can directly use the traineer in Lightning module ⚡.
