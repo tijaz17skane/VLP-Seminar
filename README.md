@@ -197,5 +197,47 @@ Alternatively, you can directly run:
 python train_seg.py
 ```
 
+
+# 💡 Some Tips for Debugging a Project
+
+## Debug Tools
+- **Use pdb**: The Python Debugger (pdb) is a powerful tool for debugging your code. You can set breakpoints, step through your code, and inspect variables. Here are some basic commands:
+    - **Use `pdb.set_trace()`**: You can insert `pdb.set_trace()` at the point in your code where you want to start the debugger. This will pause the execution and allow you to inspect the state of your program.
+    ```python
+    import pdb; pdb.set_trace()
+    ```
+    - `continue` or `c`: Continue execution until the next breakpoint.
+    - `step` or `s`: Execute the current line and stop at the first possible occasion.
+    - `next` or `n`: Continue execution until the next line in the current function is reached.
+    - `list` or `l`: Display the source code around the current line.
+    - `print` or `p`: Evaluate and print the expression.
+    - `quit` or `q`: Exit the debugger and terminate the program.
+
+## General Debugging Workflow
+
+ **Dataset and DataLoader**
+
+   - **Data Paths and Format**: Confirm data paths are correct and files are in the expected format.
+   - **Data Loading and Output**: Test data loading; verify that the dataset and dataloader output is as expected (e.g., correct shapes, labels, and batch size).
+
+
+**Model Architecture and Configuration**
+
+   - **Model Structure**: Verify that the model architecture (e.g., encoder-decoder, CNN) is correct.
+   - **Input and Output**: Ensure the input and output shapes match the model’s requirements and the task at hand.
+   - **Loss Function**: Confirm that the loss function aligns with the task and the model’s output (e.g., cross-entropy for classification).
+
+ **Training, Validation, and Testing Steps**
+
+   - **Training Step**:
+     - **Forward Pass**: Confirm the model can process a batch without errors.
+     - **Backward Pass**: Check gradients and ensure weights are updated with `optimizer.step()`.
+
+   - **Validation Step**: Ensure evaluation metrics are calculated without updating model weights.
+
+   - **Testing Step**: Similar to validation but on a separate test set; verify that metrics and predictions are as expected.
+
+
+
 # 🎉 End & Enjoy
 You can develop additional downstream tasks using this repository with various other datasets if you’re interested. 
