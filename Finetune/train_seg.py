@@ -63,7 +63,7 @@ if __name__ == '__main__':
         exit()
 
 
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     # vit: tate_dict=cls_token, pos_embed, patch_embed.proj.weight, patch_embed.proj.bias,
     #resnet_50: state_dict=model.conv1.weight, model.bn1.weight
     encoder = ImageEncoder(model_name=config["seg"]["backbone"], output_dim=config["seg"]['embed_dim']) 
