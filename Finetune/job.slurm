@@ -1,0 +1,39 @@
+#!/bin/bash
+#SBATCH --job-name=Kaide
+#SBATCH --output=ijt-oput-%A.out
+#SBATCH --error=ijt-errors-%A.err
+#SBATCH --mail-user=tallha.ijaz@tum.de
+#SBATCH --mail-type=ALL
+#SBATCH --partition=universe
+#SBATCH --time=0-36:50:00    
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=150G
+#SBATCH --nodelist=apollo
+#SBATCH --qos=master-queuesave
+
+# Log all GPU information every 60 seconds, overwriting the file each time
+GPU_LOG="gpu_usage2.log"
+while true; do
+    nvidia-smi > $GPU_LOG  # Overwrite the file with full nvidia-smi output
+    sleep 60
+done &
+
+# Store the PID of the background process
+GPU_LOG_PID=$!
+
+# Your main job commands go here
+nvidia-smi
+
+# Ensure the GPU logging process is killed when the script exits
+trap "kill $GPU_LOG_PID" EXIT
+
+
+python train_cls.py 
+--batch_size 46 --num_workers 16 --max_epochs 50 \\
+--config /u/home/ijt/Downloads/KAD/VLP-Seminar/configs/chexpert.yaml --gpus 1 \
+--dataset chexpert --data_pct 1 --ckpt_dir /u/home/ijt/Downloads/KAD/VLP-Seminar/data3/ckpts \
+--logger_dir /u/home/ijt/Downloads/KAD/VLP-Seminar/data3/log_output
+
+# Ensure the background process is terminated when the job ends
+kill %1

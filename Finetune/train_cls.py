@@ -47,7 +47,6 @@ if __name__ == '__main__':
     args = parse_args()
     config = load_config(args.config)
 
-
     if args.dataset == "rsna":
   
         datamodule = DataModule(dataset=RSNAImageClsDataset, 
@@ -64,13 +63,11 @@ if __name__ == '__main__':
         exit()
     
     if config['cls']['pretrained']:
-        checkpoint_path = config['cls']['checkpoint']
-        checkpoint = torch.load(checkpoint_path)
+        # Initialize the model
         model = FinetuneClassifier(config)
-        model_state_dict = model.state_dict()
-        common_keys = set(checkpoint['state_dict'].keys()).intersection(set(model_state_dict.keys()))
-        print(f"Number of common keys between checkpoint and model: {len(common_keys)}")
-        model.load_state_dict(checkpoint['state_dict'], strict=False)
+        
+        # No need to manually load the checkpoint; it's handled inside the model
+        print("Loaded KAD224 checkpoint into the model.")
     else:
         model = FinetuneClassifier(config)
 
@@ -107,5 +104,4 @@ if __name__ == '__main__':
     # import pdb; pdb.set_trace()
     trainer.fit(model, datamodule)
     # test
-    trainer.test(model, datamodule, ckpt_path="best")
-
+    trainer.test(model, datamodule, ckpt_path="/u/home/ijt/Downloads/KAD/VLP-Seminar/pretrained/resnet_50.ckpt")

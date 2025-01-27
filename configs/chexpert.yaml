@@ -7,7 +7,7 @@ cls:
   num_classes: 5
   pretrained: True
   freeze: True
-  checkpoint: /home/june/Code/MGCA-main/data/ckpts/resnet_50.ckpt
+  checkpoint: /u/home/ijt/Downloads/KAD/VLP-Seminar/pretrained/resnet_50.ckpt
   lr: 5.0e-4
   dropout: 0.0
   weight_decay: 1.0e-6
@@ -19,10 +19,10 @@ dataset:
   CHEXPERT_PATH_COL: Path
   CHEXPERT_SPLIT_COL: Split
   img_size: 224
-  dataset_dir: /u/home/lj0/datasets/cheXpert_small/CheXpert-v1.0-small
-  train_csv: /u/home/lj0/Code/VLP-Seminars/annotations/checkpert/train_split.csv
-  valid_csv: /u/home/lj0/Code/VLP-Seminars/annotations/checkpert/valid_split.csv
-  test_csv: /u/home/lj0/datasets/cheXpert_small/CheXpert-v1.0-small/valid.csv
+  dataset_dir: /u/home/ijt/Downloads/KAD/VLP-Seminar/datasets/chexpert
+  train_csv: /u/home/ijt/Downloads/KAD/VLP-Seminar/annotations/checkpert/train_split.csv
+  valid_csv: /u/home/ijt/Downloads/KAD/VLP-Seminar/annotations/checkpert/valid_split.csv
+  test_csv: /u/home/ijt/Downloads/KAD/VLP-Seminar/datasets/chexpert/valid.csv
   CHEXPERT_COMPETITION_TASKS: # follow mgca, only compare with these tasks
     - Atelectasis
     - Cardiomegaly
